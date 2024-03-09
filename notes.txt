@@ -1,0 +1,36 @@
+For getting notified of twitch events (when steamer goes live)
+- https://dev.twitch.tv/docs/eventsub/ 
+- Can use webhooks or websockets
+
+
+
+Features: 
+- Clock
+  - Time and timezone. 
+  - Read time from system?
+- Calendar
+  - Month calendar with current day highlighted. 
+  - Read time from system.
+- Weather
+  - Current temp / weather 
+  - Hourly temp for the next n hours 
+  - Daily temp for next x days (?)
+- Todo list
+  - List of tasks read in from google calendar
+- Twitch feed 
+  - History of subbed twitch streamers that are live 
+  - Can use eventsub with webhooks/websockets with twitch api 
+
+To be investigated: 
+ - How to write web page to e ink display. 
+ - How to style calendar date
+ - Where to pull weather data from (and how often to poll)
+ - How to integrate with google calendar to read tasks. 
+     - Can this be leveraged to style the calendar? 
+
+Writing to e ink display: 
+ - Option 1: https://github.com/samsonmking/epaper.js
+     - Directly displays web page 
+ - Options 2: custom script 
+     - Have the web page running, every time the page is updated, generate a new image. 
+     - When a new image is generated, write the image to the e ink display.   
