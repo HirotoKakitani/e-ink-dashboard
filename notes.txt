@@ -1,8 +1,8 @@
 For getting notified of twitch events (when steamer goes live)
 - https://dev.twitch.tv/docs/eventsub/ 
 - Can use webhooks or websockets
-
-
+- For example: use epd_7in5_V2_test.py
+- 
 
 Features: 
 - Clock
@@ -31,6 +31,11 @@ To be investigated:
 Writing to e ink display: 
  - Option 1: https://github.com/samsonmking/epaper.js
      - Directly displays web page 
+     - Doesn't work because of weirdness with puppeteer and chromium versions.
+ 
  - Options 2: custom script 
      - Have the web page running, every time the page is updated, generate a new image. 
      - When a new image is generated, write the image to the e ink display.   
+     - check example epd_7in_5_V2_test.py. Can display JPG images, not just BMPs
+     - Using playwright to take screenshot of browser
+     - TODO currently trying to install epdlib module to be able to write to display. 
