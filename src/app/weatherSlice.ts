@@ -37,11 +37,11 @@ export const weatherSlice = createSlice({
   },
 })
 
-// Action creators are generated for each case reducer function
 export const { setWeatherData, setError, setLoading } = weatherSlice.actions
 
 export default weatherSlice.reducer
 
+// thunk for fetching weather data and setting app state with fetched data
 export const getWeatherData = () => {
   return async (dispatch, getState) => {
     dispatch(setLoading);

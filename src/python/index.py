@@ -9,8 +9,8 @@ def run(playwright):
     # opens a new browser page
     page = browser.new_page()
     # navigate to the website
-    page.goto('http://localhost:8080')
-    # take a full-page screenshot
+    page.goto('http://localhost:3000')
+    # take a screenshot
     imgData = page.screenshot(clip={'x': 0, 'y':0, 'width':800, 'height':480})
     print("Finished screenshot")
     # always close the browser

@@ -40,11 +40,5 @@ const Region = styled.p`
   font-size: 20px;
   margin-top: 0px;
 `;
-/*
-  800 x 480
 
-  clock: 400 x 240
-  weather: 400 x 240
-  twitch: 400 x 480
-*/
 export default WeatherFeed;

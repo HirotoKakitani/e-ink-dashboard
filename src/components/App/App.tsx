@@ -7,6 +7,7 @@ import { getWeatherData } from '../../app/weatherSlice';
 import { useAppDispatch } from '../../app/hooks';
 import { selectWeatherCityName, selectWeatherRegion, selectWeatherTemp } from '../../app/selectors';
 import styled from 'styled-components';
+import { TWITCH_AUTH_URL } from '../../api/twitchService';
 
 function App() {
 
@@ -19,12 +20,19 @@ function App() {
   const weatherProps = {
     city: weatherCity, region: weatherRegion, temp: weatherTemp
   }
+
   return (
-    <AppContainer className="App">
-      <Clock />
-      <TwitchFeed />
-      <WeatherFeed {...weatherProps}/>
-    </AppContainer>
+    <div>
+      <AppContainer className="App">
+        <Clock />
+        <TwitchFeed />
+        <WeatherFeed {...weatherProps}/>
+      </AppContainer>
+      <div>
+        <p>Auth Links:</p>
+        <a href={TWITCH_AUTH_URL}>Connect with Twitch</a>
+      </div>
+    </div>
   );
 }
 
@@ -35,6 +43,6 @@ const AppContainer = styled.div`
   display: grid;
   grid-template-rows: 240px 240px;
   grid-template-columns: 400px 400px;
-
+  margin-bottom: 50px;
 `;
 export default App;

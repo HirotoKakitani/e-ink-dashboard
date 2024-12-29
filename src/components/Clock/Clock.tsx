@@ -33,13 +33,16 @@ const Clock = () => {
 
 const ClockContainer = styled.div`
   text-align: center;
+  background-color: red;
 `;
 
 const TimeDisplay = styled.p`
-
+  font-size: 50px;
+  margin-bottom: 0px;
 `;
 
 const DateDisplay = styled.p`
+  font-size: 25px;
 `;
 
 export default Clock;
