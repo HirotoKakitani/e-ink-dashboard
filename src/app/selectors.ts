@@ -32,3 +32,7 @@ export const selectTwitchData = createSelector(selectTwitchRoot, (twitchRoot) =>
 export const selectTwitchStreams = createSelector(selectTwitchData, (twitchData) => {
   return twitchData.streams;
 });
+
+export const selectIsTwitchDataLoaded = createSelector(selectTwitchRoot, (twitchRoot) => {
+  return twitchRoot.loaded;
+}); 

@@ -4,7 +4,7 @@ import { fetchFollowedStreams, fetchTwitchUserInfo } from '../api/twitchService'
 type CurrentlyLiveStreams = {
   streams: TwitchStream[];
 }
-type TwitchStream = {
+export type TwitchStream = {
   userName: string;
   title: string;
   startedAt: string;

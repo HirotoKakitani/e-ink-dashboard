@@ -42,7 +42,7 @@ const AppContainer = styled.div`
   background-color: gray;
   display: grid;
   grid-template-rows: 240px 240px;
-  grid-template-columns: 400px 400px;
+  grid-template-columns: 250px 550px;
   margin-bottom: 50px;
 `;
 export default App;

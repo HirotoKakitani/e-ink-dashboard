@@ -8,8 +8,9 @@ const Clock = () => {
   // TODO memoize?
   const formatTime = (date: Date) => {
     const hour = date.getHours();
-    const minutes = date.getMinutes(); 
-    return `${hour}:${minutes}`;
+    const minutes = date.getMinutes();
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    return `${hour}:${formattedMinutes}`;
   };
   
   useEffect(() => {
