@@ -19,10 +19,9 @@ const WeatherFeed = (props: IWeatherFeedProps) => {
 };
 
 const WeatherFeedContainer = styled.div`
-  background-color:blue;
-  border-width: 5px;
-  border-color: black;
   text-align: center;
+  grid-area: weather;
+  background: white;
 `;
 
 const Temperature = styled.p`

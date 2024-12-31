@@ -34,7 +34,7 @@ const Clock = () => {
 
 const ClockContainer = styled.div`
   text-align: center;
-  background-color: red;
+  background: white;
 `;
 
 const TimeDisplay = styled.p`

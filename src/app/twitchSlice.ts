@@ -71,7 +71,7 @@ export const getCurrentlyLiveStreamsFromTwitch = () => {
           })
         };
         console.log('Twitch data transformed ', twitchData );
-        dispatch(setTwitchData(twitchData));  
+        dispatch(setTwitchData(twitchData));
       } else {
         throw new Error('No Access Token');
       }

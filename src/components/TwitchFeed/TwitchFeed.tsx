@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { getCurrentlyLiveStreamsFromTwitch } from '../../app/twitchSlice';
 import { useSelector } from 'react-redux';
@@ -15,14 +15,36 @@ const TwitchFeed = () => {
 
   const isTwitchDataLoaded = useSelector(selectIsTwitchDataLoaded)
   const streamList = useSelector(selectTwitchStreams);
+  const [streamIndicies, setStreamIndicies] = useState([0,0]);
+  const pageNumberRef = useRef(0);
+  const MAX_PAGE_SIZE= 5; // maximum number of streams to display on screen at a time
+  const TIME_PER_PAGE = 10000; // how long to wait before changing pages (in milliseconds)
 
+  // splits up stream list into pages to display at most 5 at a time.
+  useEffect(() => {
+    if (streamList?.length > 0) {
+      const getNewIndicies = () => {
+        const numberOfPages = Math.ceil(streamList.length / MAX_PAGE_SIZE);
+        const pageLength = pageNumberRef.current === numberOfPages-1 ?
+          MAX_PAGE_SIZE - (numberOfPages*MAX_PAGE_SIZE - streamList.length) :
+          MAX_PAGE_SIZE;
+        setStreamIndicies([pageNumberRef.current*MAX_PAGE_SIZE, pageNumberRef.current*MAX_PAGE_SIZE + pageLength]);
+        pageNumberRef.current = ++pageNumberRef.current % numberOfPages;
+      };
+
+      getNewIndicies();
+      const timer = setInterval(getNewIndicies, TIME_PER_PAGE);
+      return () => clearInterval(timer);
+    }
+  }, [streamList]);
+  
   return (
     <TwitchFeedContainer>
       {!isTwitchDataLoaded && 
-        <div> Please log in to Twitch </div>
+        <LoginMessage> No Twitch data found! Please refresh or log in to your Twitch account.</LoginMessage>
       }
       <StreamList>
-        {streamList?.slice(0,10).map( streamData => <TwitchStreamInfo streamData={streamData} />)}
+        {streamList?.slice(streamIndicies[0],streamIndicies[1]).map( streamData => <TwitchStreamInfo streamData={streamData} />)}
       </StreamList>
     </TwitchFeedContainer>
   )
@@ -31,12 +53,18 @@ const TwitchFeed = () => {
 export default TwitchFeed;
 
 const TwitchFeedContainer = styled.div`
-  padding: 10px;
+  padding: 15px;
+  grid-area: twitch;
+  background: white;
+`;
+
+const LoginMessage = styled.p`
+  text-align: center;
 `;
 
 const StreamList = styled.div`
-  display: grid;
-  grid-template-rows: repeat(4, auto);
-  grid-template-columns: 47.5% 47.5%;
-  column-gap: 5%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 `

@@ -28,10 +28,10 @@ function App() {
         <TwitchFeed />
         <WeatherFeed {...weatherProps}/>
       </AppContainer>
-      <div>
+      <AuthLinks>
         <p>Auth Links:</p>
         <a href={TWITCH_AUTH_URL}>Connect with Twitch</a>
-      </div>
+      </AuthLinks>
     </div>
   );
 }
@@ -39,10 +39,18 @@ function App() {
 const AppContainer = styled.div`
   height:480px;
   width:800px;
-  background-color: gray;
   display: grid;
   grid-template-rows: 240px 240px;
   grid-template-columns: 250px 550px;
   margin-bottom: 50px;
+  grid-gap: 1px;
+  grid-template-areas:
+    "clock twitch"
+    "weather twitch";
+`;
+
+const AuthLinks = styled.div`
+  width:800px;
+  background-color:white;
 `;
 export default App;

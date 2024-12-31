@@ -8,6 +8,7 @@ type ITwitchStreamInfoProps = {
 
 const TwitchStreamInfo = (props: ITwitchStreamInfoProps) => {
   const {streamData} = {...props}; 
+  const MAX_NUMBER_OF_TAGS = 3;
 
   return (
     <TwitchStreamInfoContainer>
@@ -16,12 +17,12 @@ const TwitchStreamInfo = (props: ITwitchStreamInfoProps) => {
       <InfoRow>
         <GameName>{streamData.gameName}</GameName>
         <TagContainer>
-          {streamData.tags.slice(0,3).map(tag => <StreamTag>{tag}</StreamTag>)}
+          {streamData.tags.slice(0, MAX_NUMBER_OF_TAGS).map(tag => <StreamTag>{tag}</StreamTag>)}
         </TagContainer>
       </InfoRow>
       <InfoRow>
         <StartTime>Started at {new Date(streamData.startedAt).toLocaleTimeString()}</StartTime>
-        <ViewerCount>{streamData.viewerCount}</ViewerCount>
+        <ViewerCount>{streamData.viewerCount} people watching</ViewerCount>
       </InfoRow>
     </TwitchStreamInfoContainer>
   )
