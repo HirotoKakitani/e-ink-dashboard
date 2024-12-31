@@ -21,6 +21,10 @@ export const selectWeatherTemp = createSelector(selectWeatherData, (weatherData)
   return weatherData.temp;
 });
 
+export const selectWeatherIconUrl = createSelector(selectWeatherData, (weatherData) => {
+  return weatherData.iconUrl;
+});
+
 export const selectTwitchRoot = (state: RootState) => {
   return state.twitch;
 }

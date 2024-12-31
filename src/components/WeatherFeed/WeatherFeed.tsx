@@ -5,15 +5,17 @@ type IWeatherFeedProps = {
   city: string;
   region: string;
   temp: string;
+  iconUrl?: string;
 };
 
 const WeatherFeed = (props: IWeatherFeedProps) => {
-
+  const {temp, city, region, iconUrl} = {...props};
   return (
     <WeatherFeedContainer>
-      <Temperature>{props?.temp}</Temperature>
-      <City>{props?.city}</City>
-      <Region>{props?.region}</Region>
+      <img src={iconUrl} alt='weather icon'/>
+      <Temperature>{temp}</Temperature>
+      <City>{city}</City>
+      <Region>{region}</Region>
     </WeatherFeedContainer>
   )
 };
@@ -25,8 +27,8 @@ const WeatherFeedContainer = styled.div`
 `;
 
 const Temperature = styled.p`
-    font-size: 50px;
-    margin-bottom: 0px;
+  font-size: 50px;
+  margin: 0px;
 `;
 
 const City = styled.p`

@@ -5,7 +5,7 @@ import TwitchFeed from '../TwitchFeed/TwitchFeed';
 import { useSelector } from 'react-redux';
 import { getWeatherData } from '../../app/weatherSlice';
 import { useAppDispatch } from '../../app/hooks';
-import { selectWeatherCityName, selectWeatherRegion, selectWeatherTemp } from '../../app/selectors';
+import { selectWeatherCityName, selectWeatherIconUrl, selectWeatherRegion, selectWeatherTemp } from '../../app/selectors';
 import styled from 'styled-components';
 import { TWITCH_AUTH_URL } from '../../api/twitchService';
 
@@ -17,8 +17,10 @@ function App() {
   const weatherCity = useSelector(selectWeatherCityName);
   const weatherRegion = useSelector(selectWeatherRegion);
   const weatherTemp = useSelector(selectWeatherTemp);
+  const weatherIconUrl = useSelector(selectWeatherIconUrl);
+
   const weatherProps = {
-    city: weatherCity, region: weatherRegion, temp: weatherTemp
+    city: weatherCity, region: weatherRegion, temp: weatherTemp, iconUrl: weatherIconUrl,
   }
 
   return (

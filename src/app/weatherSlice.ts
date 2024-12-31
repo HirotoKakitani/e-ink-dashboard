@@ -5,6 +5,7 @@ type WeatherData = {
   name: string;
   region: string;
   temp: string;
+  iconUrl: string;
 }
 
 export const weatherSlice = createSlice({
@@ -51,6 +52,7 @@ export const getWeatherData = () => {
         name: weatherFetchResponse?.location?.name,
         region: weatherFetchResponse?.location?.region,
         temp: `${weatherFetchResponse?.current?.temp_f}° F`,
+        iconUrl: weatherFetchResponse?.current?.condition?.icon,
       };
 
       dispatch(setWeatherData(weatherData));
