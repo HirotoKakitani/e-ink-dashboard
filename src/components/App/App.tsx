@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Clock from '../Clock/Clock';
 import WeatherFeed from '../WeatherFeed/WeatherFeed';
 import TwitchFeed from '../TwitchFeed/TwitchFeed';
@@ -10,7 +10,15 @@ import styled from 'styled-components';
 import { TWITCH_AUTH_URL } from '../../api/twitchService';
 
 function App() {
-
+  // Refresh the app every 10 minutes to get fresh data
+  const REFRESH_TIME = 600000;
+  useEffect(() => {
+      const timer = setInterval(() => {
+        window.location.reload();
+      }, REFRESH_TIME);
+      return () => clearInterval(timer);
+  }, []);
+  
   const dispatch = useAppDispatch();
   dispatch(getWeatherData());
 
@@ -21,7 +29,7 @@ function App() {
 
   const weatherProps = {
     city: weatherCity, region: weatherRegion, temp: weatherTemp, iconUrl: weatherIconUrl,
-  }
+  };
 
   return (
     <div>
