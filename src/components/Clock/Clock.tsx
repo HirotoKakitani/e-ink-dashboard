@@ -33,13 +33,17 @@ const Clock = () => {
 };
 
 const ClockContainer = styled.div`
+  grid-area: clock;
   text-align: center;
   background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const TimeDisplay = styled.p`
   font-size: 50px;
-  margin-bottom: 0px;
+  margin: 0px;
 `;
 
 const DateDisplay = styled.p`

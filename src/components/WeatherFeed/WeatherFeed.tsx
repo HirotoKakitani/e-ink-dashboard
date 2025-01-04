@@ -33,8 +33,8 @@ const Temperature = styled.p`
 
 const City = styled.p`
   font-size: 25px;
-  margin-top: 20px;
-  margin-bottom: 0px;
+  /* margin-top: 20px; */
+  margin: 0px;
 `;
 
 const Region = styled.p`

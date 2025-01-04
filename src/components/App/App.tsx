@@ -57,6 +57,7 @@ const AppContainer = styled.div`
   grid-template-areas:
     "clock twitch"
     "weather twitch";
+  font-family: 'Helvetica';
 `;
 
 const AuthLinks = styled.div`

@@ -53,7 +53,7 @@ const TwitchFeed = () => {
 export default TwitchFeed;
 
 const TwitchFeedContainer = styled.div`
-  padding: 15px;
+  padding: 25px 15px;
   grid-area: twitch;
   background: white;
 `;
@@ -66,5 +66,5 @@ const StreamList = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 `
