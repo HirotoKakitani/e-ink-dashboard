@@ -3,11 +3,11 @@ import { TwitchStream } from "../../app/twitchSlice";
 import styled from "styled-components";
 
 type ITwitchStreamInfoProps = {
-  streamData : TwitchStream;
+  streamData: TwitchStream;
 };
 
 const TwitchStreamInfo = (props: ITwitchStreamInfoProps) => {
-  const {streamData} = {...props}; 
+  const { streamData } = { ...props };
   const MAX_NUMBER_OF_TAGS = 3;
 
   return (
@@ -17,15 +17,19 @@ const TwitchStreamInfo = (props: ITwitchStreamInfoProps) => {
       <InfoRow>
         <GameName>{streamData.gameName}</GameName>
         <TagContainer>
-          {streamData.tags.slice(0, MAX_NUMBER_OF_TAGS).map(tag => <StreamTag>{tag}</StreamTag>)}
+          {streamData.tags.slice(0, MAX_NUMBER_OF_TAGS).map((tag, key) => (
+            <StreamTag key={`tag-${tag}-${key}`}>{tag}</StreamTag>
+          ))}
         </TagContainer>
       </InfoRow>
       <InfoRow>
-        <StartTime>Started at {new Date(streamData.startedAt).toLocaleTimeString()}</StartTime>
+        <StartTime>
+          Started at {new Date(streamData.startedAt).toLocaleTimeString()}
+        </StartTime>
         <ViewerCount>{streamData.viewerCount} people watching</ViewerCount>
       </InfoRow>
     </TwitchStreamInfoContainer>
-  )
+  );
 };
 
 export default TwitchStreamInfo;
@@ -34,14 +38,14 @@ const TwitchStreamInfoContainer = styled.div`
   font-size: 12px;
 `;
 
-const UserName  = styled.p`
+const UserName = styled.p`
   font-size: 15px;
   font-weight: bold;
-  margin:0;
+  margin: 0;
 `;
 
 const StreamTitle = styled.p`
-  margin:0;
+  margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -54,7 +58,7 @@ const InfoRow = styled.div`
 `;
 
 const GameName = styled.p`
-  margin:0;
+  margin: 0;
 `;
 
 const TagContainer = styled.div`
@@ -69,15 +73,15 @@ const StreamTag = styled.p`
   margin: 0;
   background-color: black;
   border-radius: 5px;
-  color:white;
-  padding:2px;
+  color: white;
+  padding: 2px;
   font-size: 10px;
 `;
 
 const StartTime = styled.p`
-  margin:0;
+  margin: 0;
 `;
 
 const ViewerCount = styled.p`
-  margin:0;
+  margin: 0;
 `;

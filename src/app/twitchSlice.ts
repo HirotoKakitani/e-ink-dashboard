@@ -1,9 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchFollowedStreams, fetchTwitchUserInfo } from '../api/twitchService';
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  fetchFollowedStreams,
+  fetchTwitchUserInfo,
+} from "../api/twitchService";
 
 type CurrentlyLiveStreams = {
   streams: TwitchStream[];
-}
+};
 export type TwitchStream = {
   userName: string;
   title: string;
@@ -12,10 +15,10 @@ export type TwitchStream = {
   gameName?: string;
   viewerCount?: string;
   thumbnailUrl?: string;
-}
+};
 
 export const twitchSlice = createSlice({
-  name: 'twitch',
+  name: "twitch",
   initialState: {
     twitchData: {} as CurrentlyLiveStreams,
     error: undefined,
@@ -42,22 +45,27 @@ export const twitchSlice = createSlice({
       state.twitchData = {} as CurrentlyLiveStreams;
     },
   },
-})
+});
 
-export const { setTwitchData, setError, setLoading } = twitchSlice.actions
+export const { setTwitchData, setError, setLoading } = twitchSlice.actions;
 
-export default twitchSlice.reducer
+export default twitchSlice.reducer;
 
 // thunk for fetching twitch data and setting app state with fetched data
 export const getCurrentlyLiveStreamsFromTwitch = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(setLoading);
     try {
-      const accessToken = new URLSearchParams(document.location.hash?.substring(1)).get('access_token');
+      const accessToken = new URLSearchParams(
+        document.location.hash?.substring(1),
+      ).get("access_token");
       if (accessToken) {
         const userInfoReponse = await fetchTwitchUserInfo(accessToken);
         const userId = userInfoReponse?.data?.[0]?.id;
-        const twitchFetchResponse = await fetchFollowedStreams(accessToken, userId);
+        const twitchFetchResponse = await fetchFollowedStreams(
+          accessToken,
+          userId,
+        );
         const twitchData: CurrentlyLiveStreams = {
           streams: twitchFetchResponse?.data?.map((streamData) => {
             return {
@@ -67,17 +75,17 @@ export const getCurrentlyLiveStreamsFromTwitch = () => {
               tags: streamData.tags,
               gameName: streamData.game_name,
               viewerCount: streamData.viewer_count,
-            }
-          })
+            };
+          }),
         };
-        console.log('Twitch data transformed ', twitchData );
+        console.log("Twitch data transformed ", twitchData);
         dispatch(setTwitchData(twitchData));
       } else {
-        throw new Error('No Access Token');
+        throw new Error("No Access Token");
       }
-    }
-    catch (e: any) {
-      dispatch(setError);
+    } catch (e: unknown) {
+      console.error(e);
+      // dispatch(setError(e));
     }
   };
 };

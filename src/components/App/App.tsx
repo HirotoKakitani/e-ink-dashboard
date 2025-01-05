@@ -1,24 +1,29 @@
-import React, { useEffect } from 'react';
-import Clock from '../Clock/Clock';
-import WeatherFeed from '../WeatherFeed/WeatherFeed';
-import TwitchFeed from '../TwitchFeed/TwitchFeed';
-import { useSelector } from 'react-redux';
-import { getWeatherData } from '../../app/weatherSlice';
-import { useAppDispatch } from '../../app/hooks';
-import { selectWeatherCityName, selectWeatherIconUrl, selectWeatherRegion, selectWeatherTemp } from '../../app/selectors';
-import styled from 'styled-components';
-import { TWITCH_AUTH_URL } from '../../api/twitchService';
+import React, { useEffect } from "react";
+import Clock from "../Clock/Clock";
+import WeatherFeed from "../WeatherFeed/WeatherFeed";
+import TwitchFeed from "../TwitchFeed/TwitchFeed";
+import { useSelector } from "react-redux";
+import { getWeatherData } from "../../app/weatherSlice";
+import { useAppDispatch } from "../../app/hooks";
+import {
+  selectWeatherCityName,
+  selectWeatherIconUrl,
+  selectWeatherRegion,
+  selectWeatherTemp,
+} from "../../app/selectors";
+import styled from "styled-components";
+import { TWITCH_AUTH_URL } from "../../api/twitchService";
 
 function App() {
   // Refresh the app every 10 minutes to get fresh data
   const REFRESH_TIME = 600000;
   useEffect(() => {
-      const timer = setInterval(() => {
-        window.location.reload();
-      }, REFRESH_TIME);
-      return () => clearInterval(timer);
+    const timer = setInterval(() => {
+      window.location.reload();
+    }, REFRESH_TIME);
+    return () => clearInterval(timer);
   }, []);
-  
+
   const dispatch = useAppDispatch();
   dispatch(getWeatherData());
 
@@ -28,7 +33,10 @@ function App() {
   const weatherIconUrl = useSelector(selectWeatherIconUrl);
 
   const weatherProps = {
-    city: weatherCity, region: weatherRegion, temp: weatherTemp, iconUrl: weatherIconUrl,
+    city: weatherCity,
+    region: weatherRegion,
+    temp: weatherTemp,
+    iconUrl: weatherIconUrl,
   };
 
   return (
@@ -36,7 +44,7 @@ function App() {
       <AppContainer className="App">
         <Clock />
         <TwitchFeed />
-        <WeatherFeed {...weatherProps}/>
+        <WeatherFeed {...weatherProps} />
       </AppContainer>
       <AuthLinks>
         <p>Auth Links:</p>
@@ -47,8 +55,8 @@ function App() {
 }
 
 const AppContainer = styled.div`
-  height:480px;
-  width:800px;
+  height: 480px;
+  width: 800px;
   display: grid;
   grid-template-rows: 240px 240px;
   grid-template-columns: 250px 550px;
@@ -57,11 +65,11 @@ const AppContainer = styled.div`
   grid-template-areas:
     "clock twitch"
     "weather twitch";
-  font-family: 'Helvetica';
+  font-family: "Helvetica";
 `;
 
 const AuthLinks = styled.div`
-  width:800px;
-  background-color:white;
+  width: 800px;
+  background-color: white;
 `;
 export default App;

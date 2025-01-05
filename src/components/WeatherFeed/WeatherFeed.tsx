@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 type IWeatherFeedProps = {
   city: string;
@@ -9,15 +9,15 @@ type IWeatherFeedProps = {
 };
 
 const WeatherFeed = (props: IWeatherFeedProps) => {
-  const {temp, city, region, iconUrl} = {...props};
+  const { temp, city, region, iconUrl } = { ...props };
   return (
     <WeatherFeedContainer>
-      <img src={iconUrl} alt='weather icon'/>
+      <img src={iconUrl} alt="weather icon" />
       <Temperature>{temp}</Temperature>
       <City>{city}</City>
       <Region>{region}</Region>
     </WeatherFeedContainer>
-  )
+  );
 };
 
 const WeatherFeedContainer = styled.div`

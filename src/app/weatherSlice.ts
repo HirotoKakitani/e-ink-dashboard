@@ -1,15 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { fetchWeatherData } from '../api/weatherService';
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchWeatherData } from "../api/weatherService";
 
 type WeatherData = {
   name: string;
   region: string;
   temp: string;
   iconUrl: string;
-}
+};
 
 export const weatherSlice = createSlice({
-  name: 'weather',
+  name: "weather",
   initialState: {
     weatherData: {} as WeatherData,
     error: undefined,
@@ -36,15 +36,15 @@ export const weatherSlice = createSlice({
       state.weatherData = {} as WeatherData;
     },
   },
-})
+});
 
-export const { setWeatherData, setError, setLoading } = weatherSlice.actions
+export const { setWeatherData, setError, setLoading } = weatherSlice.actions;
 
-export default weatherSlice.reducer
+export default weatherSlice.reducer;
 
 // thunk for fetching weather data and setting app state with fetched data
 export const getWeatherData = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(setLoading);
     try {
       const weatherFetchResponse = await fetchWeatherData();
@@ -56,9 +56,9 @@ export const getWeatherData = () => {
       };
 
       dispatch(setWeatherData(weatherData));
-    }
-    catch (e: any) {
-      dispatch(setError);
+    } catch (e: unknown) {
+      console.error(e);
+      // dispatch(setError(e));
     }
   };
 };
