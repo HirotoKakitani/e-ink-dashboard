@@ -5,31 +5,25 @@ import io
 
 def run(playwright):
     # launch the browser
-    browser = playwright.chromium.launch()
+    browser = playwright.chromium.launch(headless=False)
     # opens a new browser page
     page = browser.new_page()
     # navigate to the website
     page.goto('http://localhost:3000')
-    # take a screenshot
-    imgData = page.screenshot(clip={'x': 0, 'y':0, 'width':800, 'height':480})
-    print("Finished screenshot")
-    # always close the browser
+    page.wait_for_timeout(5000)
+    epd = epaper.epaper('epd7in5_V2').EPD()
+    epd.init()
+    
+    while (True): 
+        # take a screenshot and write to screen
+        imgData = page.screenshot(clip={'x': 0, 'y':0, 'width':800, 'height':480})
+        image = Image.open(io.BytesIO(imgData))
+        epd.display(epd.getbuffer(image))
+        time.sleep(20)
+    
+    epd.Clear()
     browser.close()
     
-    print("starting epd connection")
-    epd = epaper.epaper('epd7in5_V2').EPD()
-    print("got epd")    
-    epd.init()
-    print("init")
-    
-    # image = Image.open('7in5_V2_test_image.jpg')
-    image = Image.open(io.BytesIO(imgData))
-    print("opened image")
-    epd.display(epd.getbuffer(image))
-    print("DEBUG HERE")
-    epd.Clear()
-
-
 with sync_playwright() as playwright:
     run(playwright)
 
