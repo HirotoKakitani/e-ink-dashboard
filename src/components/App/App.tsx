@@ -48,7 +48,7 @@ function App() {
       </AppContainer>
       <AuthLinks>
         <p>Auth Links:</p>
-        <a href={TWITCH_AUTH_URL}>Connect with Twitch</a>
+        <a href={TWITCH_AUTH_URL} data-testid="twitch-auth-link">Connect with Twitch</a>
       </AuthLinks>
     </div>
   );

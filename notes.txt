@@ -39,3 +39,10 @@ Writing to e ink display:
      - check example epd_7in_5_V2_test.py. Can display JPG images, not just BMPs
      - Using playwright to take screenshot of browser
      - TODO currently trying to install epdlib module to be able to write to display. 
+
+
+twitch and weather API: fetch once per minute
+clock: changes once per minute
+scrolling twich: every 20 seconds  
+
+python: needs to write every 20 secs 
